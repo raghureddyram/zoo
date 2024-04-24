@@ -39,25 +39,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_24_022326) do
     t.string "last_name"
     t.string "email"
     t.string "phone"
+    t.uuid "zoological_park_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["zoological_park_id"], name: "index_employees_on_zoological_park_id"
   end
 
   create_table "habitats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.uuid "zoological_parks_id"
+    t.uuid "zoological_park_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["zoological_parks_id"], name: "index_habitats_on_zoological_parks_id"
+    t.index ["zoological_park_id"], name: "index_habitats_on_zoological_park_id"
   end
 
   create_table "notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.jsonb "data"
     t.string "notable_type", null: false
     t.bigint "notable_id", null: false
+    t.uuid "creator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "creator_id"
     t.index ["creator_id"], name: "index_notes_on_creator_id"
     t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
   end

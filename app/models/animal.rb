@@ -5,4 +5,7 @@ class Animal < ApplicationRecord
 
     include Notable
     include WithNotes
+    has_many :tasks
+
+    enum status: ["healthy", "sick"]
 end

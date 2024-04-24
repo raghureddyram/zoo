@@ -8,4 +8,13 @@ class Animal < ApplicationRecord
     has_many :tasks
 
     enum status: ["healthy", "sick"]
+
+    def dietary_requirements
+        notes.where(label: "dietary_requirement")
+    end
+
+    def habitat_preferences
+        notes.where(label: "habitat_preference")
+    end
+
 end

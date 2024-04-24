@@ -11,6 +11,10 @@ class Animal < ApplicationRecord
 
     enum status: ["healthy", "sick"]
 
+    scope :in_habitat, -> { where(current_habitat_id: Animal.select(:primary_habitat_id).where.not(primary_habitat_id: nil)) }
+
+    scope :needing_attention, -> { where(status: "sick") }
+
     def dietary_requirements
         notes.where(label: "dietary_requirement")
     end

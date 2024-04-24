@@ -1,0 +1,2 @@
+class ZoologicalPark < ApplicationRecord
+end

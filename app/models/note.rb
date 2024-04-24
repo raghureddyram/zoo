@@ -1,8 +1,11 @@
 class Note < ApplicationRecord
     belongs_to :notable, polymorphic: true
+    belongs_to :secondary_notable, polymorphic: true
     belongs_to :creator, class_name: "Employee", foreign_key: 'creator_id'
 
-    # need schema validator for before habitat_preference save
+    def all_associated
+        [creator: creator, notable: notable, secondary_notable: secondary_notable]
+    end
     
-    enum label: ["dietary_requirement", "habitat_preference", "employee_note"]
+    enum label: ["dietary_requirement", "habitat_preference"]
 end

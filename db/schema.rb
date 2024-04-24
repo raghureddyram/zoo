@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_24_172624) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_24_183716) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -62,8 +62,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_24_172624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "label"
+    t.string "secondary_notable_type"
+    t.uuid "secondary_notable_id"
     t.index ["creator_id"], name: "index_notes_on_creator_id"
     t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
+    t.index ["secondary_notable_type", "secondary_notable_id"], name: "index_notes_on_secondary_notable"
   end
 
   create_table "tasks", force: :cascade do |t|

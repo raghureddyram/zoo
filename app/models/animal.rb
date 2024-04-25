@@ -7,7 +7,7 @@ class Animal < ApplicationRecord
     belongs_to :current_habitat, class_name: 'Habitat', foreign_key: 'current_habitat_id', optional: true
 
     
-    has_many :tasks
+    has_many :tasks, dependent: :destroy
 
     enum status: ["healthy", "sick"]
 

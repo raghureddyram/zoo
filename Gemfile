@@ -46,6 +46,11 @@ group :development do
   # gem "spring"
 end
 
+group :test do
+  gem 'shoulda-matchers'
+  gem "pry-rails", "~> 0.3.9"
+end
+
 
 gem "graphql", "~> 2.3"
 
@@ -56,3 +61,9 @@ gem "sidekiq", "~> 7.2"
 gem "redis", "~> 5.2"
 
 gem "sidekiq-scheduler", "~> 5.0"
+
+gem "factory_bot", "~> 6.4"
+
+gem "factory_bot_rails", "~> 6.4"
+
+

@@ -4,7 +4,7 @@ class Note < ApplicationRecord
     belongs_to :creator, class_name: "Employee", foreign_key: 'creator_id'
 
     def all_associated
-        [creator: creator, notable: notable, secondary_notable: secondary_notable]
+        {creator: creator, notable: notable, secondary_notable: secondary_notable}
     end
 
     LABELS = ["dietary_requirement", "habitat_preference"]

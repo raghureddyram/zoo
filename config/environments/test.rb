@@ -57,6 +57,4 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
-  config.credentials.content_path = 'config/credentials.yml.enc'
-  config.credentials.key_path = 'config/master.key'
 end

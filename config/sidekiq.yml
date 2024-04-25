@@ -1,0 +1,5 @@
+:scheduler:
+  :schedule:
+    mark_tasks:
+      cron: '0 */3 * * *'   # Runs the first minute of per 3 hrs
+      class: MarkTasksScheduler

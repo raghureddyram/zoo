@@ -50,3 +50,9 @@ end
 gem "graphql", "~> 2.3"
 
 gem "rspec-rails", "~> 6.1", :groups => [:development, :test]
+
+gem "sidekiq", "~> 7.2"
+
+gem "redis", "~> 5.2"
+
+gem "sidekiq-scheduler", "~> 5.0"

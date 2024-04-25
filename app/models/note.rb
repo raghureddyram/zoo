@@ -1,6 +1,6 @@
 class Note < ApplicationRecord
     belongs_to :notable, polymorphic: true
-    belongs_to :secondary_notable, polymorphic: true
+    belongs_to :secondary_notable, polymorphic: true, required: false
     belongs_to :creator, class_name: "Employee", foreign_key: 'creator_id'
 
     def all_associated

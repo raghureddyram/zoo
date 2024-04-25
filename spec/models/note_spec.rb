@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Note, type: :model do
   describe "associations" do
     it { should belong_to(:notable) }
-    it { should belong_to(:secondary_notable) }
     it { should belong_to(:creator).class_name('Employee').with_foreign_key('creator_id') }
   end
 

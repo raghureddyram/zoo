@@ -12,5 +12,19 @@ module Types
     field :label, Integer
     field :secondary_notable_type, String
     field :secondary_notable_id, Types::UuidType
+
+    field :notable, Types::NotableType
+    def notable
+      object.notable
+    end
+    field :secondary_notable, Types::NotableType
+    def secondary_notable
+      object.secondary_notable
+    end
+
+    field :creator, Types::EmployeeType 
+    def creator
+      object.creator
+    end
   end
 end

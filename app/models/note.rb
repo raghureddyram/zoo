@@ -6,6 +6,8 @@ class Note < ApplicationRecord
     def all_associated
         [creator: creator, notable: notable, secondary_notable: secondary_notable]
     end
+
+    LABELS = ["dietary_requirement", "habitat_preference"]
     
-    enum label: ["dietary_requirement", "habitat_preference"]
+    enum label: LABELS
 end

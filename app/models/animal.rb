@@ -9,7 +9,9 @@ class Animal < ApplicationRecord
     
     has_many :tasks, dependent: :destroy
 
-    enum status: ["healthy", "sick"]
+    STATUSES = ["healthy", "sick"]
+
+    enum status: STATUSES
 
     scope :in_habitat, -> { where(current_habitat_id: Animal.select(:primary_habitat_id).where.not(primary_habitat_id: nil)) }
 

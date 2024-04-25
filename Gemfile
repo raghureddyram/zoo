@@ -46,3 +46,7 @@ group :development do
   # gem "spring"
 end
 
+
+gem "graphql", "~> 2.3"
+
+gem "rspec-rails", "~> 6.1", :groups => [:development, :test]

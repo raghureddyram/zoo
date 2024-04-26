@@ -1,7 +1,9 @@
 
 --------------
 'bundle install'
+
 'bundle exec rails s'
+
 'bundle exec sidekiq -C config/sidekiq.yml' (new terminal)
 
 tests:

@@ -1,10 +1,10 @@
-# API: Create a GraphQL API endpoint for `createNote` to create a new note tied to an `Employee`, and the same note can also be tied to an `Animal` and/or `Habitat`.
-# 
+# API: Create a GraphQL API endpoint for `createAnimal` to create a new animal, and create a new habitat, or assign it to an existing habitat. # 
 module Mutations
     class CreateAnimal < BaseMutation
       # arguments passed to the `resolve` method
       argument :primary_habitat_name, String, required: true
       argument :species, String, required: true
+      argument :status, String, required: false
       
 
       field :success, Boolean, null: false
@@ -12,21 +12,27 @@ module Mutations
       field :animal, Types::AnimalType, null: true
   
   
-      def resolve(primary_habitat_name: nil, species: nil)
+      def resolve(primary_habitat_name: nil, species: nil, status: nil)
         habitat = Habitat.find_by name: primary_habitat_name 
         errors = []
 
         if habitat.blank?
-            habitat = Habitat.create(name: primary_habitat_name, zoological_park: ZoologicalPark.last)
+            begin
+                habitat = Habitat.create!(name: primary_habitat_name, zoological_park: ZoologicalPark.last)
+            rescue => e 
+                errors << e
+                return {animal: nil, success: false, errors: errors}
+            end
         end
 
-        animal = Animal.create(species: species, primary_habitat: habitat)
-        
-        if animal&.id.present?
-            {animal: {id: animal.id, species: animal.species}, success: true, errors: errors}
-        else
-            {animal: nil, success: false, errors: animal.errors.full_messages}
+        begin 
+            animal = Animal.create!(species: species, primary_habitat: habitat, status: status)
+        rescue => e
+            errors << e
+            return {animal: nil, success: false, errors: errors}
         end
+
+        {animal: animal.as_json, success: true, errors: errors}
       end
     end
   end

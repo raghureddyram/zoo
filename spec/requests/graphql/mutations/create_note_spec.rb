@@ -2,19 +2,17 @@ require 'rails_helper'
 RSpec.describe "Graphql, animals query" do
 
     describe "createNote" do
-        before do 
-            @z = ZoologicalPark.create(name: "SF Zoo")
-            @monkey_pen = Habitat.create(name: "Monkey Island", zoological_park: @z)
-            @employee = Employee.create(first_name: "R", last_name: "Reddy", phone: "325232434", email: "h@go.com", zoological_park: @z)
-        end
+        let(:zoo) {ZoologicalPark.create(name: "SF Zoo")}
+        let(:monkey_pen) {Habitat.create(name: "Monkey Island", zoological_park: zoo) }
+        let(:employee) {Employee.create(first_name: "R", last_name: "Reddy", phone: "325232434", email: "h@go.com", zoological_park: zoo)}
         
         it "should create an animal by finding by the habitat name" do
             query = <<~GRAPHQL
                 mutation {
                     createNote(input: {
-                    creatorId: "#{ @employee.id }",
-                    notableClass: "Habitat",
-                    notableId: "#{ @monkey_pen.id }",
+                    creatorId: "#{ employee.id }",
+                    notableClass: "#{monkey_pen.class.to_s}",
+                    notableId: "#{ monkey_pen.id }",
                     data: "{'Hi':'There'}"
                     }) {
                     success

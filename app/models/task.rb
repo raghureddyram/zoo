@@ -12,6 +12,13 @@ class Task < ApplicationRecord
 
 
     def mark_task_status
+        # if due date has passed, task needs attention
+        if due && due < Time.zone.now
+            self.status = "needing_attention"
+            return self.save
+        end
+
+        # if task is recurring, task may need attention
         return unless self.scheduling_interval.present?
 
         current_interval = Time.zone.now  - self.updated_at

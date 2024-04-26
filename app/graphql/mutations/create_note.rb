@@ -39,7 +39,12 @@ module Mutations
             errors << "Could not find secondary_notable based on secondary_notable_class or secondary_notable_id" if secondary_notable.blank?
         end
         
-        note = Note.create({creator: employee, notable: notable, secondary_notable: secondary_notable,  data: data, label: label})
+        begin 
+            note = Note.create({creator: employee, notable: notable, secondary_notable: secondary_notable,  data: data, label: label})
+        rescue => e
+            errors << e 
+            {note: nil, success: false, errors: errors}
+        end
 
         
         if note&.id.present?

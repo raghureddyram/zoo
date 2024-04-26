@@ -4,7 +4,6 @@ module Mutations
       # arguments passed to the `resolve` method
       argument :primary_habitat_name, String, required: true
       argument :species, String, required: true
-      argument :status, String, required: false
       
 
       field :success, Boolean, null: false
@@ -12,7 +11,7 @@ module Mutations
       field :animal, Types::AnimalType, null: true
   
   
-      def resolve(primary_habitat_name: nil, species: nil, status: nil)
+      def resolve(primary_habitat_name: nil, species: nil)
         habitat = Habitat.find_by name: primary_habitat_name 
         errors = []
 
@@ -26,7 +25,7 @@ module Mutations
         end
 
         begin 
-            animal = Animal.create!(species: species, primary_habitat: habitat, status: status)
+            animal = Animal.create!(species: species, primary_habitat: habitat)
         rescue => e
             errors << e
             return {animal: nil, success: false, errors: errors}

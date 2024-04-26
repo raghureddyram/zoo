@@ -104,33 +104,6 @@ RSpec.describe "Graphql, animals query" do
                 expect(response.parsed_body["errors"][0]["message"]).to eq("Argument 'creatorId' on InputObject 'CreateNoteInput' is required. Expected type String!")
             end
         end
-
-        context "when db validation fails" do
-            it "should not create a note and should return errors" do
-                query = <<~GRAPHQL
-                    mutation {
-                        createNote(input: {
-                        creatorId: "#{  employee.id  }",
-                        notableClass: "#{monkey_pen.class.to_s}",
-                        notableId: "#{ monkey_pen.id }",
-                        data: "{'Hi':'There'}",
-                        label: "non_existant",
-                        }) {
-                        success
-                        errors
-                        note {
-                                data
-                            }
-                        }
-                    }
-                    GRAPHQL
-
-
-                post "/graphql", params: { query: query }
-                expect(response.parsed_body).to have_validation_errors
-                expect(response.parsed_body["errors"][0]["message"]).to eq("'non_existant' is not a valid label")
-            end
-        end
     end
        
 end

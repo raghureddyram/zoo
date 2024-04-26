@@ -33,10 +33,11 @@ module Mutations
             secondary_notable = secondary_notable_class&.constantize&.find_by(id: secondary_notable_id)
             note = Note.create({creator: employee, notable: notable, secondary_notable: secondary_notable,  data: data, label: label})
         end
+        
 
         
         if note&.id.present?
-            {note: {id: note.id}, success: true, errors: errors}
+            {note: {id: note.id, data: data}, success: true, errors: errors}
         else
             {note: nil, success: false, errors: note.errors.full_messages}
         end

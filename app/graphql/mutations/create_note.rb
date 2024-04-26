@@ -1,6 +1,5 @@
 # API: Create a GraphQL API endpoint for `createNote` to create a new note tied to an `Employee`, and the same note can also be tied to an `Animal` and/or `Habitat`.
 # 
-require 'pry'
 module Mutations
     class CreateNote < BaseMutation
       # arguments passed to the `resolve` method

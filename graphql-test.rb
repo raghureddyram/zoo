@@ -60,5 +60,21 @@ mutation {
 QUERY
 
 
-result = ZooSchema.execute(op_two)
+op_three = <<~QUERY
+mutation {
+  createAnimal(input: {
+    species: "Gorilla",
+    primaryHabitatName: "Oakland Gorilla room",
+  }){
+    success
+    errors
+    animal {
+      id
+    }
+  }
+}
+QUERY
+
+
+result = ZooSchema.execute(op_three)
 puts JSON.pretty_generate(result)

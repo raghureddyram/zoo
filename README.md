@@ -10,6 +10,9 @@ tests:
 bundle exec rspec spec
 
 
+Tests show how to query the endpoints - for example see below.
+
+<img width="1012" alt="Screenshot 2024-04-26 at 11 53 37 AM" src="https://github.com/raghureddyram/zoo/assets/6393327/d9f0c7b2-2b4d-4c96-a118-036942257905">
 ---------
 
 

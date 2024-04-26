@@ -13,7 +13,7 @@ class Animal < ApplicationRecord
 
     enum status: STATUSES
 
-    scope :in_habitat, -> { where(current_habitat_id: Animal.select(:primary_habitat_id).where.not(primary_habitat_id: nil)) }
+    scope :in_habitat, -> { Animal.find_by_sql( "SELECT * from animals where animals.primary_habitat_id = animals.current_habitat_id") }
 
     scope :needing_attention, -> { where(status: "sick") }
 

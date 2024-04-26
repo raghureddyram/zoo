@@ -18,7 +18,11 @@ module Mutations
   
       def resolve(creator_id: nil, notable_class: nil, notable_id: nil, data: nil, secondary_notable_class: nil, secondary_notable_id: nil, label: nil)
         employee = Employee.find_by(id: creator_id)
-        notable = notable_class.constantize.find_by(id: notable_id)
+        notable = notable_class&.constantize&.find_by(id: notable_id)
+        if employee.blank? | notable.blank?
+            {note: nil, success: false, errors: ["Could not find notable or creator. Please ensure notable_id, notable_class, and creator_id passed in appropriately"]}
+        end
+
         note = nil
         errors = []
         if data.present?
@@ -29,11 +33,13 @@ module Mutations
                 errors << "Data unable to parse"
             end
         end
-        if employee and notable
+    
+        if secondary_notable_class
             secondary_notable = secondary_notable_class&.constantize&.find_by(id: secondary_notable_id)
-            note = Note.create({creator: employee, notable: notable, secondary_notable: secondary_notable,  data: data, label: label})
+            errors << "Could not find secondary_notable based on secondary_notable_class or secondary_notable_id" if secondary_notable.blank?
         end
         
+        note = Note.create({creator: employee, notable: notable, secondary_notable: secondary_notable,  data: data, label: label})
 
         
         if note&.id.present?

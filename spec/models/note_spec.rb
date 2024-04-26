@@ -26,7 +26,7 @@ RSpec.describe Note, type: :model do
 
   describe "enum label" do
     it "has labels for dietary_requirement and habitat_preference" do
-      expect(Note.labels).to eq({"dietary_requirement" => 0, "habitat_preference" => 1})
+      expect(Note.labels).to eq({"dietary_requirement" => 0, "habitat_preference" => 1, "illness" => 2})
     end
   end
 end

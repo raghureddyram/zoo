@@ -51,7 +51,7 @@ animal3 = Animal.create!(
 task1 = Task.create!(
   name: "Morning Feeding",
   description: "Provide lion with a balanced meal",
-  scheduling_interval: "1d",  
+  scheduling_interval: 1.day,  
   task_type: 0,  
   due: Time.now + 1.hour ,
   animal: animal1
@@ -60,7 +60,7 @@ task1 = Task.create!(
 task2 = Task.create!(
   name: "Enclosure Cleaning",
   description: "Clean monkey enclosure",
-  scheduling_interval: "1w",  
+  scheduling_interval: 1.week,  
   task_type: 1,  
   animal: animal2
 )
@@ -69,6 +69,6 @@ note1 = Note.create!(
   notable_type: "Animal",
   notable_id: animal1.id,
   data: { observation: "Lion seems lethargic this morning" },
-  label: 1,  
+  label: 2,
   creator: employee1
 )

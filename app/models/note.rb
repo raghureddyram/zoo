@@ -7,7 +7,7 @@ class Note < ApplicationRecord
         {creator: creator, notable: notable, secondary_notable: secondary_notable}
     end
 
-    LABELS = ["dietary_requirement", "habitat_preference"]
+    LABELS = ["dietary_requirement", "habitat_preference", "illness"]
     
     enum label: LABELS
 end

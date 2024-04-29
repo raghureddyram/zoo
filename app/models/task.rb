@@ -15,6 +15,7 @@ class Task < ApplicationRecord
         # if due date has passed, task needs attention
         if due && due < Time.zone.now
             self.status = "needing_attention"
+            self.due = nil
             return self.save
         end
 
